@@ -98,8 +98,11 @@
 <div class="deep-background active"></div>
 <div id="particles-background"></div>
 <!-- 1. intro -->
+  <div class="intro-wave-top"></div> 
 <section class="intro-section" id="intro">
-  <div class="intro-wave-top"></div>
+	<canvas id="ai-pattern"></canvas>
+	<div class="ai-curve"></div>
+
   <div class="content-grid">
     <div class="text-block">
       <h2>Aiceberg Mind?</h2>
@@ -109,14 +112,41 @@
         It's a project of heart and science, born to support parents in their most essential mission:  
         <strong>programming their children's inner future</strong>.
       </p>
-    </div>
+    </div>  
   </div>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textBlock = document.querySelector("#intro .text-block");
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  if (textBlock) {
+    observer.observe(textBlock);
+  }
+});
+</script>
+
+
+
+
+
 <!-- AICEBERG CONCEPT SECTION -->
 <section class="content-block" id="concept">
   <div class="content-grid">
     <div class="text-block">
-      <h2>The Aiceberg Concept</h2>
+      <h2>The Aiceberg Concept</h1>
       <h2><strong>Why "Aiceberg"?</strong></h2>
       <p>
         Aiceberg Mind embodies the alliance between artificial intelligence and the depth of educational knowledge.
@@ -151,6 +181,7 @@
         </p>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -620,7 +651,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 </script>
+<script>
+const canvas = document.getElementById("ai-pattern");
+const ctx = canvas.getContext("2d");
 
+canvas.width = 120;
+canvas.height = window.innerHeight;
+
+const points = Array.from({length: 10}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+}));
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = "#0D4D5E";
+  ctx.lineWidth = 0.5;
+
+  for (let i = 0; i < points.length; i++) {
+    for (let j = i + 1; j < points.length; j++) {
+      ctx.beginPath();
+      ctx.moveTo(points[i].x, points[i].y);
+      ctx.lineTo(points[j].x, points[j].y);
+      ctx.stroke();
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
 
 
 
