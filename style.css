@@ -192,7 +192,7 @@ p {
   width: clamp(250px, 25vw, 350px)!important; /* scala in base al viewport */
   left: 40% !important; 
   transform-origin: bottom center;
-  transform: translateX(-90%) scale(1);
+  transform: translateX(-60%) scale(1);
   transition: transform 0.2s ease-out;
   will-change: transform;
 }
@@ -438,6 +438,56 @@ ul li:hover {
 
 
 /* === INTRO SECTION === */
+
+.ai-curve {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 550px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--secondary-color), var(--blue-dark));
+  clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
+  animation: floatCurve 10s ease-in-out infinite alternate;
+  opacity: 0.1;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes floatCurve {
+  from {
+    transform: translateY(0px) scaleX(1);
+  }
+  to {
+    transform: translateY(-20px) scaleX(1.05);
+  }
+}
+@media (max-width: 768px) {
+  .ai-curve {
+    display: none;
+  }
+}
+
+#ai-pattern {
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 500px;
+  width: 60%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.2;
+  animation: waveShift 10s linear infinite;
+}
+
+@keyframes waveShift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-20%);
+  }
+}
+
 #intro {
   position: relative;
   min-height: 100vh;
@@ -454,6 +504,24 @@ ul li:hover {
   z-index: 2;
   background-attachment: fixed;
 }
+
+#intro .text-block {
+  opacity: 0;
+  filter: blur(8px);
+  text-shadow: 0 0 8px rgba(0,0,0,0.1);
+  transform: scale(0.98) translateY(40px);
+  letter-spacing: 0.1em; /* lettere distanziate da "freddo" */
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter, letter-spacing;
+}
+
+#intro .text-block.active {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1) translateY(0);
+  letter-spacing: 0.02em; /* compatta il testo, "fuoco" */
+}
+
 
 #intro .intro-wave-top {
   position: absolute;
@@ -491,7 +559,7 @@ ul li:hover {
 
 /* Optional: glowing scroll hint */
 #intro::after {
-  content: "↓ Scroll to Discover";
+  content: "↓";
   position: absolute;
   bottom: 2rem;
   left: 50%;
@@ -553,13 +621,22 @@ ul li:hover {
 }
 
 
-/* === CONCEPT SECTION === */
+
+
+
+
+
+
+
+
+/* === NEW STYLES FOR CONCEPT SECTION === */
 
 #concept {
-  background: none;
-  padding: 5rem 2rem;
+  background: rgba(255, 255, 255, 0.92); /* no blur */
   position: relative;
-  overflow: hidden;
+  margin-top: -100vh;
+  padding-top: 120vh;
+  z-index: 10;
 }
 
 #concept h2 {
@@ -637,7 +714,19 @@ ul li:hover {
   }
 }
 
+.accordion-block {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
 
+.accordion-block:nth-of-type(1) {
+  animation-delay: 0.4s;
+}
+
+.accordion-block:nth-of-type(2) {
+  animation-delay: 0.8s;
+}
 
 
 
