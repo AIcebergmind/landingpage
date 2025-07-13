@@ -10,7 +10,6 @@
   --font-sans: 'Be Vietnam Pro', 'Helvetica Neue', sans-serif;
   --secondary-color-rgb: 170, 208, 209;
 --secondary-color-alpha: rgba(var(--secondary-color-rgb), 0.5); /* esempio con opacità */
---font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 /* === GLOBAL STYLES === */
@@ -41,25 +40,97 @@ main {
 }
 
 
+
+
+
+@media (max-width: 768px) {
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  main {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .content-grid {
+    flex-direction: column !important;
+    padding: 2rem 1rem !important;
+    gap: 2rem !important;
+  }
+
+  .text-block {
+    text-align: left;
+    padding: 1rem 0 !important;
+    margin: 0 auto!important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: 1.3rem !important;
+    line-height: 1.2;
+  }
+  
+  p, li {
+    font-size: 1rem !important;
+    line-height: 1.5;
+  }
+
+  .tagline {
+    font-size: 1rem !important;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  #intro::after {
+    font-size: 1.2rem !important;
+    bottom: 1rem !important;
+  }
+
+  .ai-curve,
+  #ai-pattern {
+    display: none !important;
+  }
+}
+
+
 h1 {
   font-size: 4.4rem;
   font-weight: 700;
   line-height: 1.2;
+  background: linear-gradient(to right, var(--secondary-color), var(--blue-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 500;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 1.3rem;
   margin-bottom: 1.25rem;
 }
 
@@ -174,14 +245,6 @@ p {
   }
 }
 
-.iceberg-fixed-layer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100vh;
-  pointer-events: none;
-}
-
 
  .iceberg-top {
   position: absolute;
@@ -190,11 +253,9 @@ p {
   z-index: -1;
   pointer-events: none;
   width: clamp(250px, 25vw, 350px)!important; /* scala in base al viewport */
-  left: 40% !important; 
+  left: 41% !important; 
   transform-origin: bottom center;
   transform: translateX(-60%) scale(1);
-  transition: transform 0.2s ease-out;
-  will-change: transform;
 }
 
 .iceberg-top img {
@@ -202,6 +263,24 @@ p {
   height: auto;
   display: block;
 }
+
+.iceberg-down {
+  position: absolute;
+  top: 49.5%; /* attaccato al fondo della hero */
+  left: 37.5%;
+  transform: translateX(-50%);
+  z-index: 1; /* dietro tutto */
+  pointer-events: none;
+  width: clamp(250px, 25vw, 350px);
+}
+
+.iceberg-down img {
+  width: 202%;
+  height: auto;
+  display: block;
+}
+
+
 
 .scroll-indicator {
   position: absolute;
@@ -223,6 +302,80 @@ p {
 .scroll-indicator.hidden {
   opacity: 0;
 }
+
+
+
+/* HERO RESPONSIVE */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80vh;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-title span {
+    font-size: 2.3rem;
+    transform: translateX(0);
+    opacity: 1;
+    animation: none;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+  }
+
+ .iceberg-top {
+  position: absolute;
+  bottom: 0!important;
+  top:50%;
+  z-index: -1;
+  pointer-events: none;
+  width: clamp(250px, 25vw, 350px)!important; /* scala in base al viewport */
+  left: -5%!important; 
+  transform-origin: bottom center;
+  transform: translateY(25%);
+}
+
+  .scroll-indicator {
+    bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .scroll-indicator .arrow {
+    font-size: 1.6rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .sticky-menu {
@@ -293,11 +446,31 @@ section h2, section p, section li {
 
 
 /* Darkening by section */
-.dark-1 { background-color: #f9f9f9; color: #222; }
-.dark-2 { background-color: #e2f1f3; color: #111; }
-.dark-3 { background-color: #c9e5ea; color: #000; }
-.dark-4 { background-color: #b0d9e0; color: #fff; }
-.dark-5 { background-color: #073642; color: #fff; }
+.dark-1 {
+  background-color: #e5f7ff;   /* icy azure (ghiaccio brillante) */
+  color: #0a1e2a;
+}
+
+.dark-2 {
+  background-color: #c2e9fb;   /* celeste vivo, fresco */
+  color: #092436;
+}
+
+.dark-3 {
+  background-color: #91d8f7;   /* blu-acqua brillante */
+  color: #06202f;
+}
+
+.dark-4 {
+  background-color: #40bfe4;   /* blu vibrante, dinamico, AI-energy */
+  color: #ffffff;
+}
+
+.dark-5 {
+  background-color: #00324e;   /* blu profondo, tech-notturno */
+  color: #e0faff;
+}
+
 
 
 
@@ -484,7 +657,7 @@ ul li:hover {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-20%);
+    transform: translateX(-60%);
   }
 }
 
@@ -538,7 +711,7 @@ ul li:hover {
   font-size: 3.5rem;
   font-weight: 700;
   color: var(--primary-color);
-  animation: fadeUp 1s ease-out both;
+  animation: fadeInUp 1.2s ease-out both;
 }
 
 #intro .tagline {
@@ -564,7 +737,7 @@ ul li:hover {
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.95rem;
+  font-size: 1.95rem;
   color: var(--blue-dark);
   opacity: 0.8;
   animation: bounce 2.5s infinite;
@@ -606,9 +779,6 @@ ul li:hover {
 }
 
 /* Animazioni applicate ai singoli elementi dentro #intro */
-#intro h2 {
-  animation: fadeInUp 1.2s ease-out both;
-}
 
 #intro .tagline {
   animation: slideInLeft 1.4s ease-out both;
@@ -619,6 +789,8 @@ ul li:hover {
   animation: scaleIn 1.6s ease-out both;
   animation-delay: 0.6s;
 }
+
+
 
 
 
@@ -730,16 +902,112 @@ ul li:hover {
 
 
 
+/* Vertical line to the left */
+.concept-block {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.concept-block::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 20px;
+  height: 80%;
+  background: linear-gradient(to bottom, var(--secondary-color), var(--blue-dark));
+  border-radius: 3px;
+  animation: growLine 2s ease-out forwards;
+}
+@keyframes growLine {
+  from { height: 0; }
+  to { height: 80%; }
+}
+
+/* Sequential fade-up for list items */
+.accordion-block li {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s forwards ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .concept-block::before {
+    left: -6px;
+  }
+  .concept-block {
+    padding-left: 1rem;
+  }
+}
+.accordion-block {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: scale(0.97) translateY(20px);
+  transition: 
+    max-height 1s ease,
+    opacity 1s ease,
+    transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.8s ease;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.accordion-block.open {
+  max-height: 1200px; /* assicurati che sia maggiore del contenuto */
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.accordion-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  padding: 1.5rem 0 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.accordion-header .arrow {
+  transition: transform 0.4s ease;
+  font-size: 1.9rem;
+  margin-left: 0.75rem;
+}
+
+.accordion-header.open .arrow.up,
+.accordion-header.open .arrow.down {
+  transform: rotate(180deg);
+}
 
 
+.accordion-block.open ul li {
+  animation: fadeInUp 0.6s ease forwards;
+}
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-
-
-
-
-
-
+.waypoint {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  margin-top: 100px; /* questo ritarda lo switch */
+}
 
 
 
