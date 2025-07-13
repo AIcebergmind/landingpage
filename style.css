@@ -312,7 +312,7 @@ p {
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 100vh;
+    height: 80vh;
     padding: 2rem 1rem;
     position: relative;
     overflow: hidden;
@@ -353,6 +353,23 @@ p {
   transform-origin: bottom center;
   transform: translateY(25%);
 }
+
+.iceberg-down {
+  position: absolute;
+  top: 49.5%; /* attaccato al fondo della hero */
+  left: 20.5%;
+  transform: translateX(-50%);
+  z-index: 1; /* dietro tutto */
+  pointer-events: none;
+  width: clamp(250px, 25vw, 350px);
+}
+
+.iceberg-down img {
+  width: 202%;
+  height: auto;
+  display: block;
+}
+
 
   .scroll-indicator {
     bottom: 1rem;
