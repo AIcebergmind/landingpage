@@ -111,6 +111,10 @@
   <animate attributeName="cx" values="59.5;60.5;59.5" dur="3s" repeatCount="indefinite" begin="0.2s"/>
 </circle>
 
+<!-- Palpebre (chiuse) -->
+<ellipse class="eyelid upper" cx="40" cy="55" rx="4" ry="0" fill="#fff" />
+<ellipse class="eyelid upper" cx="60" cy="55" rx="4" ry="0" fill="#fff" />
+
 
   <!-- Becco -->
   <polygon points="47,60 53,60 50,65" fill="#ff9800"/>
@@ -162,9 +166,10 @@
 <nav class="sticky-menu" id="main-menu">
   <ul>
     <li><a href="#intro">Aiceberg Mind</a></li>
-	    <li><a href="#Concept">Concept</a></li>
+	<li><a href="#concept">Concept</a></li>
     <li><a href="#mission">Mission</a></li>
     <li><a href="#vision">Vision</a></li>
+	<li><a href="#approach">Approach</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#presence">Digital Presence</a></li>
@@ -266,6 +271,7 @@ window.addEventListener("scroll", () => {
   <div class="content-grid">
     <div class="text-block concept-block">
       <h1>The Aiceberg Concept</h1>
+	  <h2 class="tagline"> built above. rooted below</h2>
       <p>
         Aiceberg Mind embodies the alliance between artificial intelligence and the depth of educational knowledge.
         Its name symbolizes pedagogy on two levels: the alliance between AI and educational depth.
@@ -396,7 +402,8 @@ document.addEventListener("DOMContentLoaded", () => {
 <section class="content-block" id="mission">
   <div class="content-grid">
     <div class="text-block">
-      <h2>Our Mission</h2>
+      <h1>Our Mission</h1>
+	  <h2 class="tagline"> creating tools to shape the invisible</h2>
       <p>
         We create multi-format content — videos, audios, eBooks, applications, printables —  
         to support families in building the first years of life,  
@@ -406,11 +413,14 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </section>
+
 <!-- 1A. VISION -->
 <section class="content-block" id="vision">
   <div class="content-grid">
     <div class="text-block">
-      <h2>Our Vision</h2>
+      <h1>Our Vision</h1>
+	  <h2 class="tagline"> shaping minds from the inside out</h2>
+	  
       <p>
         🧠 <strong>From 0 to 7 years old, everything anchors:</strong><br />
         Self-perception, confidence, personal value, inner security, relationship to the world.
@@ -430,10 +440,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <!-- 3. CONCEPT SECTION -->
-<section class="content-block" id="concept">
+<section class="content-block" id="approach">
   <div class="content-grid">
     <div class="text-block">
-      <h2>Our Concept</h2>
+      <h1>The Aiceberg method</h1>
+	  <h2 class="tagline">a synergy of AI and human depth</h2>
       <p>
         Aiceberg Mind is born from the synergy between <strong>Artificial Intelligence</strong> and <strong>human sciences</strong>.
         This union allows us to combine technological creativity with deep pedagogical and neuroscientific research.
@@ -442,6 +453,17 @@ document.addEventListener("DOMContentLoaded", () => {
         Our method is based on a <strong>two-layered educational approach</strong>:
         entertaining content generated with AI, built on a solid foundation of academic and field research.
       </p>
+    </div>
+  </div>
+      <div class="gallery-block">
+      <div class="gallery-row">
+        <img src="images/ai-symbol.jpg" alt="AI Symbol" />
+        <img src="images/brain-pedagogy.jpg" alt="Pedagogy & Brain" />
+      </div>
+      <div class="gallery-row">
+        <img src="images/layers-iceberg.jpg" alt="Iceberg Layers" />
+        <img src="images/child-curiosity.jpg" alt="Child Learning" />
+      </div>
     </div>
   </div>
 </section>
@@ -664,7 +686,27 @@ document.addEventListener("DOMContentLoaded", () => {
       <li><a href="#">EN / IT</a></li>
     </ul>
   </footer>
-</body>
+  
+  
+  
+<div id="energy-saver-overlay">
+  <div class="energy-message">
+    <h2>We’re saving energy for deeper thinking</h2>
+    <p>
+      This mindful pause is a chance to recharge — for you and the system.<br />
+      This is a good moment to stretch, breathe, or simply look away from the screen.<br />
+      Move your mouse or touch the screen when you're ready to dive back in.
+    </p>
+  </div>
+</div>
+
+
+  
+  
+  
+  
+  
+  </body>
 
 
 <script>
@@ -966,7 +1008,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 <!-- SCRIPT 2: ALI ANIMATE SU SCROLL -->
-<script>
 document.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   const maxAngle = 10; // massimo angolo di rotazione in gradi
@@ -981,6 +1022,27 @@ document.addEventListener('scroll', () => {
   // Applica rotazione rispetto al punto centrale dell’ala
   leftWing.setAttribute("transform", `rotate(${-angle} 30 80)`);
   rightWing.setAttribute("transform", `rotate(${angle} 70 80)`);
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const penguin = document.querySelector('.penguin-mascot');
+  let idleTimer;
+
+  function setIdle() {
+    penguin.classList.add('idle');
+  }
+
+  function resetIdle() {
+    penguin.classList.remove('idle');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(setIdle, 4000); // dopo 4s di inattività, chiude gli occhi
+  }
+
+  document.addEventListener('mousemove', resetIdle);
+  document.addEventListener('scroll', resetIdle);
+
+  resetIdle(); // avvia
 });
 </script>
 
@@ -1046,6 +1108,96 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
+
+<script>
+// === ENERGY SAVER MODE ===
+
+let idleTimer;
+let isIdle = false;
+
+function enterEnergySaver() {
+  isIdle = true;
+  document.body.classList.add('energy-saver');
+
+  // Pausa animazioni JS personalizzate
+  window.pausePenguinAnimation = true;
+  window.pauseBubbles = true;
+
+  // Esempio: ferma eventuali intervals
+  if (window.bubbleInterval) clearInterval(window.bubbleInterval);
+}
+
+function exitEnergySaver() {
+  if (isIdle) {
+    isIdle = false;
+    document.body.classList.remove('energy-saver');
+
+    // Riattiva JS personalizzati
+    window.pausePenguinAnimation = false;
+    window.pauseBubbles = false;
+
+    // Riattiva bubble interval se necessario
+    window.bubbleInterval = setInterval(() => {
+      const penguin = document.querySelector('.penguin-mascot');
+      if (penguin?.classList.contains('active') && !window.pauseBubbles) {
+        createBubble();
+      }
+    }, 600);
+  }
+  resetIdleTimer();
+}
+
+function resetIdleTimer() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(enterEnergySaver, 60000); // 1 min timeout
+}
+
+['mousemove', 'touchstart', 'scroll'].forEach(evt =>
+  document.addEventListener(evt, exitEnergySaver)
+);
+
+resetIdleTimer(); // avvio
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  let idleTimer;
+  let isIdle = false;
+
+  function enterEnergySaver() {
+    isIdle = true;
+    document.getElementById("energy-saver-overlay")?.classList.add("active");
+    console.log("🟡 Energy Saver ATTIVO");
+  }
+
+  function exitEnergySaver() {
+    if (!isIdle) return;
+    isIdle = false;
+    document.getElementById("energy-saver-overlay")?.classList.remove("active");
+    console.log("🟢 Energy Saver DISATTIVATO");
+  }
+
+  function resetIdleTimer() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(enterEnergySaver, 10000); // 10 secondi per test
+    console.log("⏳ Timer reset");
+  }
+
+  ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
+    document.addEventListener(evt, () => {
+      exitEnergySaver();
+      resetIdleTimer();
+    })
+  );
+
+  resetIdleTimer();
+});
+</script>
+
+
 
 
 
