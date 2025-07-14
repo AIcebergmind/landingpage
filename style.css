@@ -266,12 +266,17 @@ p {
 
 .iceberg-down {
   position: absolute;
-  top: 49.5%; /* attaccato al fondo della hero */
+    top: 49.5%; /* attaccato al fondo della hero */
   left: 37.5%;
-  transform: translateX(-50%);
-  z-index: 1; /* dietro tutto */
+  transform: translateX(-50%) scale(1);
+  z-index: -10;
   pointer-events: none;
   width: clamp(250px, 25vw, 350px);
+  opacity: 1;
+  transition: 
+    transform 2.8s ease, 
+    opacity 1.8s ease, 
+    filter 1.8s ease, 
 }
 
 .iceberg-down img {
@@ -280,7 +285,12 @@ p {
   display: block;
 }
 
-
+.iceberg-down.fixed {
+  position: fixed;
+      top: -49.5%; /* attaccato al fondo della hero */
+  left: 32%;
+  
+}
 
 .scroll-indicator {
   position: absolute;
@@ -359,9 +369,10 @@ p {
   top: 49.5%; /* attaccato al fondo della hero */
   left: 20.5%;
   transform: translateX(-50%);
-  z-index: 1; /* dietro tutto */
+  z-index: -2; /* dietro tutto */
   pointer-events: none;
   width: clamp(250px, 25vw, 350px);
+  will-change: transform;
 }
 
 .iceberg-down img {
@@ -533,18 +544,117 @@ section h2, section p, section li {
 /* === 3. MASCOTTE PINGUINO SCROLL ANIMATION === */
 .penguin-mascot {
   position: fixed;
-  bottom: 0;
-  left: 10%;
-  width: 80px;
-  z-index: 1000;
+  bottom: 50px;
+  left: 50%;
+  width: 100px;
+  z-index: 1;
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s ease, transform 1s ease;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
 }
+
 .penguin-mascot.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+.eyelid {
+  transform-origin: center;
+  animation: blink 4s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes blink {
+  0%, 90%, 100% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  92%, 96% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+
+.penguin-mascot.swim {
+  animation: penguinFloat 3s ease-in-out infinite;
+}
+
+.penguin-mascot.diving {
+  animation: penguinDive 3s ease-in-out infinite;
+}
+
+@keyframes penguinFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes penguinDive {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes floatPenguin {
+  0%, 100% { transform: translateY(30px); }
+  50% { transform: translateY(20px); }
+}
+
+.penguin-mascot .scarf {
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+}
+
+.penguin-mascot .scarf-tail {
+  animation: waveTailUp 3s ease-in-out infinite alternate;
+  transform-origin: bottom left;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+}
+
+
+@keyframes waveTailUp {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(8deg); }
+}
+
+@keyframes float-scarf {
+  0%   { transform: rotate(0deg) translateY(0); }
+  50%  { transform: rotate(-3deg) translateY(-2px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+.bubbles {
+  position: absolute; 
+  width: 8px;
+  height: 8px;
+  bottom:100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  animation: bubble-rise 3s ease-out forwards;
+  opacity: 0.8;
+  pointer-events: none;
+}
+.bubbles.visible {
+  position: absolute; 
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -80px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+
+
 
 /* === 4. KEYWORD LOOP TEXT === */
 .keyword-loop {
@@ -583,6 +693,7 @@ ul li:hover {
   margin-top: 2rem;
   text-align: center;
 }
+
 #countdown span {
   font-weight: bold;
   margin: 0 0.2rem;
@@ -615,6 +726,7 @@ ul li:hover {
   border: none;
   padding: 2rem;
   text-align:left;
+  z-index:999;
 }
 .text-block.visible {
   opacity: 1;
@@ -747,7 +859,7 @@ ul li:hover {
   animation: fadeUp 1.4s ease-out both;
 }
 
-/* Optional: glowing scroll hint */
+/* Optional: glowing scroll hint 
 #intro::after {
   content: "↓";
   position: absolute;
@@ -760,7 +872,7 @@ ul li:hover {
   animation: bounce 2.5s infinite;
   z-index: 10;
   pointer-events: none;
-}
+*/
 
 @keyframes fadeInUp {
   0% {
