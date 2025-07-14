@@ -120,13 +120,13 @@ h1 {
 
 h2 {
   font-size: 2.5rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 p {
@@ -144,6 +144,14 @@ p {
   color: var(--third-color); /* ad esempio un verde o blu profondo */
 }
 
+#.tagline {
+  font-size: 2.5rem;
+  font-style: italic;
+  font-weight:200;
+  margin-bottom: 1.5rem;
+  color: var(--blue-dark);
+  animation: fadeUp 1.2s ease-out both;
+}
 
 /* === HERO SECTION === */
 
@@ -217,15 +225,14 @@ p {
 }
 
 .hero-title,
-.subtitle,
-.tagline {
+.subtitle,{
   transition: transform 0.5s ease-out;
   will-change: transform;
 }
 
-.tagline {
+.hero .tagline {
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 200;
   opacity: 0.8;
   margin-top: 1rem;
   animation: fadeUp 1.6s ease-out forwards;
@@ -350,6 +357,7 @@ p {
     font-size: 1.1rem;
     margin-top: 0.5rem;
     line-height: 1.4;
+	font-weight:100;
   }
 
  .iceberg-top {
@@ -438,6 +446,14 @@ p {
   opacity: 1;
 }
 
+
+
+
+
+
+
+
+
 /* === DEEP BACKGROUND === */
 .deep-background {
   position: fixed;
@@ -456,6 +472,16 @@ p {
 .deep-background.active {
   opacity: 0.9;
 }
+
+
+
+
+
+
+
+
+
+
 
 /* === SECTION STYLES === */
 section {
@@ -503,6 +529,16 @@ section h2, section p, section li {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* === PARALLAX LAYERS === */
 .parallax-layer {
   will-change: transform;
@@ -530,6 +566,17 @@ section h2, section p, section li {
   --parallax-speed: 0.3;
 }
 
+
+
+
+
+
+
+
+
+
+
+
 /* === 2. BACKGROUND PARTICLES CONTAINER (placeholder) === */
 #particles-background {
   position: fixed;
@@ -541,6 +588,14 @@ section h2, section p, section li {
   pointer-events: none;      /* clic e hover passano attraverso */
   background: transparent;
 }
+
+
+
+
+
+
+
+
 /* === 3. MASCOTTE PINGUINO SCROLL ANIMATION === */
 .penguin-mascot {
   position: fixed;
@@ -576,6 +631,16 @@ section h2, section p, section li {
   }
 }
 
+/* Default: occhi aperti */
+.eyelid.upper {
+  transition: ry 1.5s ease;
+  ry: 0;
+}
+
+/* Quando idle: palpebre calano */
+.penguin-mascot.idle .eyelid.upper {
+  ry: 4;
+}
 
 .penguin-mascot.swim {
   animation: penguinFloat 3s ease-in-out infinite;
@@ -733,14 +798,6 @@ ul li:hover {
   transform: translateY(0);
 }
 
-
-
-
-
-
-
-/* === INTRO SECTION === */
-
 .ai-curve {
   position: absolute;
   left: 0;
@@ -789,6 +846,15 @@ ul li:hover {
     transform: translateX(-60%);
   }
 }
+
+
+
+
+
+
+/* === INTRO SECTION === */
+
+
 
 #intro {
   position: relative;
@@ -844,8 +910,9 @@ ul li:hover {
 }
 
 #intro .tagline {
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   font-style: italic;
+  font-weight:200;
   margin-bottom: 1.5rem;
   color: var(--blue-dark);
   animation: fadeUp 1.2s ease-out both;
@@ -930,7 +997,7 @@ ul li:hover {
 
 
 
-/* === NEW STYLES FOR CONCEPT SECTION === */
+/* === CONCEPT SECTION === */
 
 #concept {
   background: rgba(255, 255, 255, 0.92); /* no blur */
@@ -941,11 +1008,14 @@ ul li:hover {
 }
 
 #concept h2 {
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 400;
   text-align: left;
   animation: fadeInUp 1s ease-out forwards;
 }
+
+
+
 
 #concept p,
 #concept ul {
@@ -1142,6 +1212,271 @@ ul li:hover {
 
 
 
+
+
+/* === MISSION SECTION === */
+#mission {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(245, 255, 255, 0.9));
+  position: relative;
+  padding: 8rem 2rem;
+  overflow: hidden;
+  z-index: 5;
+}
+
+#mission .text-block {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 30px rgba(13, 77, 94, 0.1);
+  animation: fadeInUp 1.2s ease-out forwards;
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+#mission .text-block.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#mission h1 {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  background: linear-gradient(to right, var(--secondary-color), var(--blue-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#mission .tagline {
+  font-size: 2.25rem;
+  font-style: italic;
+  font-weight:200;
+  margin-bottom: 1.5rem;
+  color: var(--blue-dark);
+  animation: fadeUp 1.2s ease-out both;
+}
+
+
+#mission h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+#mission p {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  line-height: 1.75;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#mission em {
+  display: block;
+  margin-top: 2rem;
+  font-style: italic;
+  color: var(--blue-dark);
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === VISION SECTION === */
+#vision .text-block {
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 25px rgba(13, 77, 94, 0.08);
+  transform: translateY(30px);
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+#vision .text-block.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#vision h1 {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  background: linear-gradient(to right, var(--secondary-color), var(--blue-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#vision .tagline {
+  font-size: 2.25rem;
+  font-style: italic;
+  font-weight:200;
+  margin-bottom: 1.5rem;
+  color: var(--blue-dark);
+  animation: fadeUp 1.2s ease-out both;
+}
+
+
+#vision h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+#vision p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+#vision strong {
+  color: var(--blue-dark);
+  font-weight: 600;
+}
+
+#vision ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+#vision ul li {
+  font-size: 1.2rem;
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+#vision ul li::before {
+  content: "🌿";
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  font-size: 1rem;
+}
+
+
+
+
+/* === APPROACH SECTION === */
+#approach {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(245, 255, 255, 0.9));
+  position: relative;
+  padding: 6rem 2rem;
+  z-index: 5;
+}
+
+#approach .tagline {
+  font-size: 2.25rem;
+  font-style: italic;
+  font-weight:200;
+  margin-bottom: 1.5rem;
+  color: var(--blue-dark);
+  animation: fadeUp 1.2s ease-out both;
+}
+
+
+.approach-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#approach .text-block {
+  flex: 1 1 45%;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(13, 77, 94, 0.08);
+  animation: fadeInUp 1s ease forwards;
+}
+
+.gallery-block {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.gallery-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.gallery-row img {
+  width: 100%;
+  max-width: 48%;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.gallery-row img:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+
+#mission h1 {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  background: linear-gradient(to right, var(--secondary-color), var(--blue-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .approach-grid {
+    flex-direction: column;
+  }
+
+  .gallery-row {
+    flex-direction: column;
+  }
+
+  .gallery-row img {
+    max-width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* === CONTACT FORM === */
 .contact-section form {
   display: flex;
@@ -1195,4 +1530,39 @@ footer {
   color: var(--white);
   text-decoration: none;
   font-size: 0.9rem;
+}
+
+
+
+
+/* === ENERGY SAVER OVERLAY === */
+
+#energy-saver-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+    width: 100vw;   /* larghezza 100% della viewport */
+  height: 100vh;  /* altezza 100% della viewport */
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  color: white;
+  font-size: 1.2rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s ease;
+}
+
+#energy-saver-overlay.active {
+  display: flex;
+  width:100%;
+  height:auto;
+  opacity: 1;
+}
+
+.energy-message {
+  padding: 2rem;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 1rem;
 }
