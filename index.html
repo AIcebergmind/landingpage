@@ -77,7 +77,87 @@
       <p>Dive in</p>
     </div>
     <div class="iceberg-top"><img src="images/iceberg_top.svg" /></div>
+
 </header>
+<div class="bubbles"></div>
+<svg id="penguin" class="penguin-mascot" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Corpo -->
+  <ellipse cx="50" cy="70" rx="30" ry="40" fill="url(#bodyGradient)" />
+
+  <!-- Pancia -->
+  <ellipse cx="50" cy="75" rx="18" ry="30" fill="url(#bellyGradient)" />
+
+  <!-- Occhi -->
+  <circle cx="40" cy="55" r="4" fill="#fff"/>
+  <circle cx="60" cy="55" r="4" fill="#fff"/>
+  <circle cx="40" cy="55" r="1.5" fill="#000"/>
+  <circle cx="60" cy="55" r="1.5" fill="#000"/>
+  
+<!-- Palpebre animate -->
+<ellipse class="eyelid" cx="40" cy="55" rx="4" ry="4" fill="#fff">
+  <animate attributeName="ry" values="4;0.1;4" dur="5s" repeatCount="indefinite" />
+</ellipse>
+
+<ellipse class="eyelid" cx="60" cy="55" rx="4" ry="4" fill="#fff">
+  <animate attributeName="ry" values="4;0.1;4" dur="5s" repeatCount="indefinite" begin="0.1s" />
+</ellipse>
+
+<!-- Pupille animate -->
+<circle class="pupil" cx="40" cy="55" r="1.5" fill="#000">
+  <animate attributeName="cx" values="39.5;40.5;39.5" dur="3s" repeatCount="indefinite" />
+</circle>
+
+<circle class="pupil" cx="60" cy="55" r="1.5" fill="#000">
+  <animate attributeName="cx" values="59.5;60.5;59.5" dur="3s" repeatCount="indefinite" begin="0.2s"/>
+</circle>
+
+
+  <!-- Becco -->
+  <polygon points="47,60 53,60 50,65" fill="#ff9800"/>
+
+  <!-- Ali -->
+  <path id="wing-left" d="M20 70 Q8 90 32 92" fill="url(#wingGradient)" />
+  <path id="wing-right" d="M80 70 Q92 90 68 92" fill="url(#wingGradient)" />
+
+  <!-- Piedini -->
+  <ellipse cx="40" cy="110" rx="6" ry="3" fill="#ffb74d"/>
+  <ellipse cx="60" cy="110" rx="6" ry="3" fill="#ffb74d"/>
+
+
+<!-- 🧣 Sciarpa rossa evidenziata -->
+<rect x="22" y="63" width="60" height="8" rx="3" ry="3"
+      fill="#e53935"
+      stroke="#b71c1c"
+      stroke-width="1.5"
+      class="scarf"/>
+
+<!-- Coda della sciarpa: in alto a destra, sollevata -->
+<path d="M77 65 Q93 58 81 50 Q93 55 75 58 Q76 61 77 65 Z" fill="red" 
+      fill="#d32f2f"
+      stroke="#b71c1c"
+      stroke-width="1.5"
+      class="scarf-tail"/>
+
+  
+  <!-- Gradienti -->
+  <defs>
+    <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#263238" />
+      <stop offset="100%" stop-color="#000" />
+    </linearGradient>
+
+    <linearGradient id="bellyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e0f7fa" />
+    </linearGradient>
+
+    <linearGradient id="wingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#37474f"/>
+      <stop offset="100%" stop-color="#000"/>
+    </linearGradient>
+  </defs>
+</svg>
+
 
 <nav class="sticky-menu" id="main-menu">
   <ul>
@@ -145,6 +225,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+<script>
+window.addEventListener("scroll", () => {
+  const iceberg = document.querySelector(".iceberg-down");
+  const hero = document.querySelector(".hero");
+  const heroHeight = hero.offsetHeight;
+  const scrollY = window.scrollY;
+
+  const triggerPoint = heroHeight + 100; // inizia animazione dopo che la hero è fuori + 100px
+
+  if (scrollY > triggerPoint) {
+    // Calcola progress solo dopo trigger
+    const progress = Math.min((scrollY - triggerPoint) / 500, 1); // normalizzato per 500px
+    const scale = 1 + progress * 0.8;
+    const opacity = 1 - progress * 0.6;
+    const blur = progress * 4;
+	window.penguinOffsetY = -(progress * 200); // globale, da 0 a -200
+
+    iceberg.classList.add("fixed");
+    iceberg.style.transform = `translateX(-50%) scale(${scale})`;
+    iceberg.style.opacity = opacity.toFixed(2);
+    iceberg.style.filter = `blur(${blur}px)`;
+  } else {
+    // Reset se sopra triggerPoint
+    iceberg.classList.remove("fixed");
+    iceberg.style.transform = `translateX(-50%) scale(1)`;
+    iceberg.style.opacity = "1";
+    iceberg.style.filter = "blur(0px)";
+	window.penguinOffsetY = 0;
+  }
+});
+</script>
+
 
 
 
@@ -754,6 +866,186 @@ draw();
 </script>
 
 
+<!-- PINGUINO NON CONTROLLATO
+<script>
+const penguin = document.querySelector('.penguin-mascot');
+const bodyHeight = document.querySelector('body').offsetHeight;
+const viewportHeight = window.innerHeight;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+
+  // 1. Appare appena scrolli leggermente
+  if (scrollY > 20 && scrollY < bodyHeight) {
+    penguin.classList.add('visible');
+
+    // Galleggia in avanti con effetto parallax leggero
+    const forward = Math.min((scrollY / bodyHeight) * 50, 50);
+    penguin.style.transform = `translate(30px, ${-forward}px) rotate(${forward / 2}deg)`;
+
+  } else if (scrollY >= heroHeight) {
+    // 2. Inizia l'immersione dopo l'hero
+    const diveDepth = Math.min((scrollY - bodyHeight) * 0.6, viewportHeight);
+    penguin.classList.add('visible');
+    penguin.style.transform = `translate(20px, ${diveDepth}px) rotate(40deg)`;
+
+  } else {
+    // 3. Torna invisibile sopra
+    penguin.classList.remove('visible');
+    penguin.style.transform = 'translateY(30px)';
+  }
+});
+</script>
+-->
+
+<script>
+// SCRIPT 1 – PINGUINO (movimento, galleggiamento, rotazione)
+document.addEventListener("DOMContentLoaded", () => {
+  const penguin = document.querySelector('.penguin-mascot');
+  const hero = document.querySelector('.hero');
+  const heroHeight = hero.offsetTop + hero.offsetHeight;
+  const viewportHeight = window.innerHeight;
+  const bodyHeight = document.body.offsetHeight;
+
+  let isFollowingMouse = false;
+  let targetX = 0;
+  let targetY = window.innerHeight / 2;
+  let currentX = 0;
+  let currentY = window.innerHeight / 2;
+
+  // Movimento scroll-based + attiva follow mouse
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 1 && scrollY < bodyHeight) {
+      penguin.classList.add('visible');
+
+      if (scrollY < heroHeight + 1) {
+        // Fase di galleggiamento automatica (parallax)
+        isFollowingMouse = false;
+        const forward = Math.min((scrollY / bodyHeight) * 50, 50);
+        penguin.style.transform = `translate(30px, ${-forward}px) rotate(${forward / 2}deg)`;
+        currentY = Math.min(currentY, window.innerHeight * 0.65);
+        currentY = Math.max(currentY, window.innerHeight * 0.25);
+      } else {
+        // Attiva movimento col mouse
+        isFollowingMouse = true;
+      }
+    } else {
+      isFollowingMouse = false;
+      penguin.classList.remove('visible');
+      penguin.style.transform = 'translateY(30px)';
+    }
+  });
+
+  // Mouse movement tracking
+  document.addEventListener("mousemove", (e) => {
+    if (!isFollowingMouse) return;
+    targetX = e.clientX - 250; // offset a sinistra per centrare
+    targetY = e.clientY - 250; // offset verticale centrato
+  });
+
+  // Loop animazione morbida (galleggiamento + rotazione)
+  function animate() {
+    if (isFollowingMouse) {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      const deltaX = targetX - currentX;
+      const rotation = Math.max(-20, Math.min(20, deltaX * 0.25));
+
+      penguin.style.transform = `translate(${currentX}px, ${currentY}px) rotate(${rotation}deg)`;
+    }
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+
+</script>
+
+<script>
+<!-- SCRIPT 2: ALI ANIMATE SU SCROLL -->
+<script>
+document.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const maxAngle = 10; // massimo angolo di rotazione in gradi
+
+  // Calcola l'angolo in base allo scroll verticale
+  const angle = Math.min(scrollY * 0.05, maxAngle);
+
+  // Selettori delle ali SVG
+  const leftWing = document.querySelector('#wing-left');
+  const rightWing = document.querySelector('#wing-right');
+
+  // Applica rotazione rispetto al punto centrale dell’ala
+  leftWing.setAttribute("transform", `rotate(${-angle} 30 80)`);
+  rightWing.setAttribute("transform", `rotate(${angle} 70 80)`);
+});
+</script>
+
+
+<script>
+<!-- SCRIPT 3: BOLLICINE ANIMATE ANCORATE AL PINGUINO -->
+function createBubble() {
+  const bubble = document.createElement("div");
+  bubble.classList.add("bubbles");
+
+  const penguin = document.querySelector(".penguin-mascot");
+  const rect = penguin.getBoundingClientRect();
+
+  // Posizione fissa relativa alla viewport (segue il pinguino)
+  const offsetX = (Math.random() - 0.5) * 30;
+  const offsetY = Math.random() * 10;
+
+  bubble.style.position = "fixed";
+  bubble.style.left = `${rect.left + rect.width / 2 + offsetX}px`;
+  bubble.style.top = `${rect.top + offsetY}px`;
+
+  // Dimensioni e durata casuali
+  const size = Math.random() * 6 + 4;
+  bubble.style.width = bubble.style.height = `${size}px`;
+  bubble.style.animationDuration = `${Math.random() * 2 + 1.5}s`;
+
+  document.body.appendChild(bubble);
+
+  // Rimuovi la bolla dopo l’animazione
+  setTimeout(() => bubble.remove(), 3000);
+}
+
+// Crea bollicine solo se il pinguino è attivo
+setInterval(() => {
+  const penguin = document.querySelector('.penguin-mascot');
+  if (penguin.classList.contains('active')) {
+    createBubble();
+  }
+}, 600);
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const penguin = document.querySelector(".penguin-mascot");
+  const hero = document.querySelector(".hero");
+  const heroHeight = hero.offsetTop + hero.offsetHeight;
+  let hasBecomeVisible = false;
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+
+    // Quando superiamo la hero per la prima volta
+    if (scrollY > heroHeight + 50 && !hasBecomeVisible) {
+      penguin.classList.add("visible");
+      hasBecomeVisible = true; // blocca la rimozione futura
+    }
+
+    // Controllo solo per la classe "active"
+    if (scrollY > heroHeight + 50) {
+      penguin.classList.add("active");
+    } else {
+      penguin.classList.remove("active");
+    }
+  });
+});
+</script>
 
 
 
