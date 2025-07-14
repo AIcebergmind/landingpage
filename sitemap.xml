@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.aicebergmind.com/</loc>
+    <lastmod>2025-07-10</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://www.aicebergmind.com/#vision</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.aicebergmind.com/#formats</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.aicebergmind.com/#team</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.aicebergmind.com/#method</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.aicebergmind.com/#projects</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.aicebergmind.com/#contact</loc>
+    <priority>0.6</priority>
+  </url>
+</urlset>
