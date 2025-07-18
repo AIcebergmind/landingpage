@@ -729,7 +729,7 @@ section h2, section p, section li {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -10;
+  z-index: -150;
   pointer-events: none;      
   background: transparent;
     }
