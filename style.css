@@ -3,14 +3,12 @@
   --primary-color: #222;
   --secondary-color: #AAD0D1;
   --text-color: #000;
-  --background-color: #f9f9f9;
   --white: #ffffff;
   --gray-light: #eeeeee;
   --blue-dark: #08343f;
   --font-sans: 'Be Vietnam Pro', 'Helvetica Neue', sans-serif;
-  --secondary-color-rgb: 170, 208, 209;
---secondary-color-alpha: rgba(var(--secondary-color-rgb), 0.5); /* esempio con opacità */
-}
+  }
+
 
 /* === GLOBAL STYLES === */
 * {
@@ -41,7 +39,7 @@ main {
 
 
 h1 {
-  font-size: 4.4rem;
+  font-size: 5.4rem;
   font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(to right, var(--gray-light), var(--primary-color));
@@ -50,7 +48,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 400;
   margin-bottom: 1rem;
 }
@@ -60,27 +58,29 @@ h3 {
   font-weight: 300;
 }
 
-p {
-  font-size: 1.3rem;
+p, li, ul {
+  font-size: 1.5rem;
   margin-bottom: 1.25rem;
+  color:white !important;
+    animation: fadeUp 1.2s ease-out both;
 }
 
 .text-block em {
-  font-style: italic;
+    font-size: 1.5rem;
+	font-style: italic;
   opacity: 0.85;
 }
 
 .text-block strong {
+    font-size: 1.5rem;
   font-weight: 600;
-  color: var(--third-color); /* ad esempio un verde o blu profondo */
 }
 
 #.tagline {
   font-size: 2.5rem;
   font-style: italic;
-  font-weight:200;
+  font-weight:100;
   margin-bottom: 1.5rem;
-  color: var(--blue-dark);
   animation: fadeUp 1.2s ease-out both;
 }
 
@@ -152,18 +152,12 @@ p {
 
   .tagline {
     font-size: 1rem !important;
-    text-align: center;
     margin-top: 1rem;
   }
 
   #intro::after {
     font-size: 1.2rem !important;
     bottom: 1rem !important;
-  }
-
-  .ai-curve,
-  #ai-pattern {
-    display: none !important;
   }
 }
 
@@ -188,16 +182,7 @@ p {
   opacity: 1;
 }
 
-/* Logo nell'hero */
-.hero .logo {
-  position: absolute;
-  top: 8rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height:auto;
-  z-index: 110;
-}
+
 
 /* Logo nella HERO */
 .hero .logo.logotype {
@@ -205,13 +190,9 @@ p {
   top: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;         /* dimensione visiva fissa o con clamp se vuoi */
-  max-width: 20vw;      /* adattabilità responsive */
+  width: 150px;         /* dimensione visiva fissa o con clamp se vuoi */
+  max-width: 30vw;      /* adattabilità responsive */
   z-index: 110;
-}
-
-.hero .logo.logotype {
-  width: clamp(60px, 10vw, 100px);
 }
 
 .hero .logo.logotype img {
@@ -225,7 +206,7 @@ p {
   display: flex;
   align-items: center;
   width: auto;
-  max-height:60px;
+  max-height:100px;
   margin-right: 1rem;
   opacity: 0;
   transform: translateY(-10px);
@@ -257,9 +238,11 @@ p {
 /* === HERO SECTION === */
 
 .hero {
+  position: relative;
   height: 100vh;
   display: flex;
-  background: linear-gradient(to bottom, var(--white) 60%, var(--secondary-color));
+  animation: dayCycle 60s infinite ease-in-out;
+  transition: background 10s ease;
   color: var(--primary-color);
   flex-direction: column;
   justify-content: center;
@@ -269,8 +252,42 @@ p {
   width: 100%;
   padding: 2rem;
   overflow: hidden; /* serve per tagliare iceberg-top se esce */
-  z-index:1;
+  z-index:100;
   }
+
+@keyframes dayCycle {
+  0%   { background: linear-gradient(to bottom, #cce7ff, #ffffff); }       /* Alba leggera */
+  6.6% { background: linear-gradient(to bottom, #b3d9ff, #e6f4ff); }       /* Alba avanzata */
+  13.3% { background: linear-gradient(to bottom, #a0d8ef, #ccf2ff); }      /* Mattina */
+  20%  { background: linear-gradient(to bottom, #87ceeb, #e0f7fa); }       /* Giorno */
+  26.6% { background: linear-gradient(to bottom, #69c0e0, #d0f0f5); }      /* Mezzogiorno */
+  33.3% { background: linear-gradient(to bottom, #52b2cf, #b2ebf2); }      /* Pomeriggio */
+  40%  { background: linear-gradient(to bottom, #ffc3a0, #ffafbd); }       /* Inizio tramonto */
+  46.6% { background: linear-gradient(to bottom, #fbc2eb, #a6c1ee); }      /* Tramonto pieno */
+  53.3% { background: linear-gradient(to bottom, #d38312, #a83279); }      /* Tardo tramonto */
+  60%  { background: linear-gradient(to bottom, #2c3e50, #4ca1af); }       /* Crepuscolo */
+  66.6% { background: linear-gradient(to bottom, #0f2027, #203a43); }      /* Inizio notte */
+  73.3% { background: linear-gradient(to bottom, #141e30, #243b55); }      /* Notte piena */
+  80%  { background: linear-gradient(to bottom, #1a1a2e, #16213e); }       /* Notte profonda */
+  86.6% { background: linear-gradient(to bottom, #283e51, #485563); }      /* Notte chiara */
+  93.3% { background: linear-gradient(to bottom, #b3d9ff, #e6f4ff); }      /* Alba che torna */
+  100% { background: linear-gradient(to bottom, #cce7ff, #ffffff); }       /* Alba completa */
+}
+
+
+
+
+
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(to bottom, #002f36, #e0f7fa); /* notte/nebbia */
+  opacity: 0; /* inizialmente invisibile */
+  transition: opacity 10s ease-in-out;
+  pointer-events: none;
+}
+
 
 .hero-title {
   font-size: clamp(1.8rem, 4vw, 3rem); /* adatta tra 1.8rem e 3rem in base alla larghezza */
@@ -341,7 +358,7 @@ p {
   height: 140px;
   background: linear-gradient(to bottom, #e0f7fa 10%);
   clip-path: polygon(0 0, 20% 30%, 40% 0, 60% 40%, 80% 10%, 100% 30%, 100% 100%, 0% 100%);
-  z-index: -2;
+  z-index: 200;
 }
 
 .hero-title,
@@ -371,6 +388,7 @@ p {
     transform: translateY(0);
   }
 }
+
 
 @media (max-width: 480px) {
   .hero-title {
@@ -475,7 +493,7 @@ p {
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 80vh;
+    height: 100vh;
     padding: 2rem 1rem;
     position: relative;
     overflow: hidden;
@@ -500,7 +518,7 @@ p {
   }
 
   .tagline {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     margin-top: 0.5rem;
     line-height: 1.4;
 	font-weight:100;
@@ -520,8 +538,8 @@ p {
 
 .iceberg-down {
   position: absolute;
-  top: 49.5%; /* attaccato al fondo della hero */
-  left: 20.5%;
+  top: 44.5%; /* attaccato al fondo della hero */
+  left: 25.5%;
   transform: translateX(-50%);
   z-index: -2; /* dietro tutto */
   pointer-events: none;
@@ -561,9 +579,11 @@ p {
   padding: 0.5rem;
 }
 
-.sticky-menu ul {
+.sticky-menu ul,li {
   display: flex;
   gap: 2rem;
+  font-size:1.2rem;
+    margin-bottom: 0.25rem;
   list-style: none;
 }
 
@@ -608,31 +628,6 @@ p {
 
 
 
-
-
-
-
-
-
-
-
-/* === SECTION STYLES === */
-section {
-  background-color: transparent !important;
-  padding: 4rem 2rem;
-  text-align: center;
-   min-height: 60vh; /* o 50vh, come preferisci */
-}
-
-section:nth-of-type(even) {
-background-color: rgba(255, 255, 255, 0.85);
-}
-
-section h2, section p, section li {
-  color: var(--primary-color);
-}
-
-
 /* Darkening by section */
 .dark-1 {
   background-color: #e5f7ff;   /* icy azure (ghiaccio brillante) */
@@ -673,67 +668,23 @@ section h2, section p, section li {
 
 
 
-/* === PARALLAX LAYERS === */
-.parallax-layer {
-  will-change: transform;
-  transition: transform 0.1s ease-out;
-}
-
-/* Specific parallax intensity per section */
-#vision.parallax-layer {
-  --parallax-speed: 0.1;
-}
-
-#formats.parallax-layer {
-  --parallax-speed: 0.15;
-}
-
-#team.parallax-layer {
-  --parallax-speed: 0.2;
-}
-
-#method.parallax-layer {
-  --parallax-speed: 0.25;
-}
-
-#projects.parallax-layer {
-  --parallax-speed: 0.3;
-}
 
 
 
 
 
 
-
-
-
-
-
-
-/* === 2. BACKGROUND PARTICLES CONTAINER (placeholder) === 
-#particles-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -10;              
-  pointer-events: none;      
-  background: transparent;
-}*/
 
     #particles-background {
-  position: fixed;
-  top: 0;
-  left: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -150;
-  pointer-events: none;      
+        z-index: -100;
+		  pointer-events: none;      
   background: transparent;
     }
-
 
 
 
@@ -867,24 +818,6 @@ section h2, section p, section li {
 
 
 
-/* === 4. KEYWORD LOOP TEXT === */
-.keyword-loop {
-  display: inline-block;
-  font-weight: bold;
-  background: linear-gradient(to right, var(--secondary-color), var(--blue-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: fadeWords 8s infinite;
-}
-
-@keyframes fadeWords {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  30% { opacity: 1; }
-  40% { opacity: 0; }
-  100% { opacity: 0; }
-}
-
 /* === 5. LIST ITEM HOVER EFFECTS === */
 ul li {
   transition: transform 0.3s ease, background-color 0.3s ease;
@@ -910,6 +843,10 @@ ul li:hover {
   margin: 0 0.2rem;
 }
 
+
+
+
+
 /* === CONTENT BLOCKS === */
 .content-grid {
   max-width: 1200px;
@@ -917,13 +854,13 @@ ul li:hover {
   padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+
 }
 
 
 @media (min-width: 768px) {
   .content-grid {
-    padding: 6rem 4rem;
+    padding: 8rem 4rem;
   }
 }
 
@@ -944,57 +881,6 @@ ul li:hover {
   transform: translateY(0);
 }
 
-.ai-curve {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 550px;
-  height: 100%;
-  background: linear-gradient(to bottom, var(--secondary-color), var(--blue-dark));
-  clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
-  animation: floatCurve 10s ease-in-out infinite alternate;
-  opacity: 0.1;
-  z-index: 10;
-  pointer-events: none;
-}
-
-@keyframes floatCurve {
-  from {
-    transform: translateY(0px) scaleX(1);
-  }
-  to {
-    transform: translateY(-20px) scaleX(1.05);
-  }
-}
-@media (max-width: 768px) {
-  .ai-curve {
-    display: none;
-  }
-}
-
-#ai-pattern {
-  position: relative;
-  left: 0;
-  top: 0;
-  height: 500px;
-  width: 60%;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.2;
-  animation: waveShift 10s linear infinite;
-}
-
-@keyframes waveShift {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-60%);
-  }
-}
-
-
-
 
 
 
@@ -1004,16 +890,10 @@ ul li:hover {
 #intro {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    rgba(224, 247, 250, 0.95) 0%,
-    rgba(205, 238, 240, 0.15) 90%
-  );
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 6rem 2rem;
   z-index: 2;
   background-attachment: fixed;
 }
@@ -1035,14 +915,6 @@ ul li:hover {
   letter-spacing: 0.02em; /* compatta il testo, "fuoco" */
 }
 
-#intro h1 {
-  font-size: 3.4rem;
-  font-weight: 700;
-  line-height: 1.2;
-  background: linear-gradient(to right,  var(--primary-color), var(--gray-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 #intro .intro-wave-top {
   position: absolute;
   top: -1px;
@@ -1054,44 +926,25 @@ ul li:hover {
   z-index: -1;
 }
 
+#intro h1 {
+  line-height: 1.2;
+  background: linear-gradient(to right, var(--primary-color), var(--gray-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 #intro h2 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
   animation: fadeInUp 1.2s ease-out both;
 }
 
 #intro .tagline {
-  font-size: 2.25rem;
-  font-style: italic;
-  font-weight:200;
-  margin-bottom: 1.5rem;
-  color: var(--blue-dark);
   animation: fadeUp 1.2s ease-out both;
 }
 
 #intro p {
-  font-size: 1.1rem;
-  color: #064048;
-  max-width: 800px;
-  margin: 0 auto 1.5rem;
   animation: fadeUp 1.4s ease-out both;
 }
 
-/* Optional: glowing scroll hint 
-#intro::after {
-  content: "↓";
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.95rem;
-  color: var(--blue-dark);
-  opacity: 0.8;
-  animation: bounce 2.5s infinite;
-  z-index: 10;
-  pointer-events: none;
-*/
 
 @keyframes fadeInUp {
   0% {
@@ -1152,7 +1005,6 @@ ul li:hover {
 /* === CONCEPT SECTION === */
 
 #concept {
-  background: rgba(255, 255, 255, 0.92); /* no blur */
   position: relative;
   margin-top: -100vh;
   padding-top: 120vh;
@@ -1160,8 +1012,6 @@ ul li:hover {
 }
 
 #concept h1 {
-  font-size: 3.4rem;
-  font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(to right, var(--primary-color), var(--gray-light));
   -webkit-background-clip: text;
@@ -1193,13 +1043,13 @@ ul li:hover {
   margin-bottom: 0.5rem;
   position: relative;
   padding-left: 1.5rem;
+  color:var(--text-color);
 }
 
 #concept ul li::before {
   content: "•";
   position: absolute;
   left: 0;
-  color: var(--blue-dark);
   font-weight: bold;
 }
 
@@ -1291,6 +1141,40 @@ ul li:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .concept-block::before {
@@ -1374,18 +1258,13 @@ ul li:hover {
 
 /* === MISSION SECTION === */
 #mission {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(245, 255, 255, 0.9));
   position: relative;
-  padding: 8rem 2rem;
   overflow: hidden;
   z-index: 5;
 }
 
 #mission .text-block {
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 3rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 0 30px rgba(13, 77, 94, 0.1);
   animation: fadeInUp 1.2s ease-out forwards;
   transform: translateY(30px);
   opacity: 0;
@@ -1397,8 +1276,6 @@ ul li:hover {
 }
 
 #mission h1 {
-  font-size: 3.4rem;
-  font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(to right, var(--primary-color), var(--gray-light));
   -webkit-background-clip: text;
@@ -1407,45 +1284,8 @@ ul li:hover {
 
 
 
-#mission .tagline {
-  font-size: 2.25rem;
-  font-style: italic;
-  font-weight:200;
-  margin-bottom: 1.5rem;
-  color: var(--blue-dark);
-  animation: fadeUp 1.2s ease-out both;
-}
-
-
-#mission h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: var(--primary-color);
-}
-
-#mission p {
-  font-size: 1.3rem;
-  color: var(--text-color);
-  line-height: 1.75;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-#mission em {
-  display: block;
-  margin-top: 2rem;
-  font-style: italic;
-  color: var(--blue-dark);
-  font-size: 1.2rem;
-  font-weight: 500;
-  opacity: 0.9;
-}
-
-
 /* === TEAM SECTION === */
 #team {
-  padding: 6rem 2rem;
   position: relative;
   z-index: 4;
 }
@@ -1453,8 +1293,6 @@ ul li:hover {
 #team .text-block {
   padding: 3rem 2rem;
   border-radius: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
   animation: fadeInUp 1.2s ease-out forwards;
   transform: translateY(30px);
   opacity: 0;
@@ -1466,8 +1304,6 @@ ul li:hover {
 }
 
 #team h1 {
-  font-size: 3.4rem;
-  font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(to right, var(--primary-color), var(--gray-light));
   -webkit-background-clip: text;
@@ -1479,13 +1315,11 @@ ul li:hover {
   font-style: italic;
   font-weight:200;
   margin-bottom: 1.5rem;
-  color: var(--blue-dark);
   animation: fadeUp 1.2s ease-out both;
 }
 
 #team p {
   font-size: 1.2rem;
-  color: var(--text-color);
   line-height: 1.7;
 }
 
@@ -1504,7 +1338,6 @@ ul li:hover {
 }
 
 #team li::before {
-  content: "👤";
   position: absolute;
   left: 0;
   top: 0;
@@ -1539,24 +1372,9 @@ ul li:hover {
 
 
 
-/* === VISION SECTION === */
-#vision .text-block {
-  padding: 3rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 0 25px rgba(13, 77, 94, 0.08);
-  transform: translateY(30px);
-  opacity: 0;
-  animation: fadeInUp 1.2s ease-out forwards;
-}
-
-#vision .text-block.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
+/* === VISION & MISSION SECTION === */
 
 #vision h1 {
-  font-size: 3.4rem;
-  font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(to right, var(--primary-color), var(--gray-light));
   -webkit-background-clip: text;
@@ -1568,47 +1386,10 @@ ul li:hover {
   font-style: italic;
   font-weight:200;
   margin-bottom: 1.5rem;
-  color: var(--blue-dark);
   animation: fadeUp 1.2s ease-out both;
 }
 
-
-#vision h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: var(--primary-color);
-}
-
-#vision p {
-  font-size: 1.2rem;
-  color: var(--text-color);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-#vision strong {
-  color: var(--blue-dark);
-  font-weight: 600;
-}
-
-#vision ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 1rem;
-}
-
-#vision ul li {
-  font-size: 1.2rem;
-  padding-left: 1.5rem;
-  position: relative;
-  margin-bottom: 0.8rem;
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
 #vision ul li::before {
-  content: "🌿";
   position: absolute;
   left: 0;
   top: 0.1rem;
@@ -1620,9 +1401,7 @@ ul li:hover {
 
 /* === APPROACH SECTION === */
 #approach {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(245, 255, 255, 0.9));
   position: relative;
-  padding: 6rem 2rem;
   z-index: 5;
 }
 
@@ -1631,13 +1410,10 @@ ul li:hover {
   font-style: italic;
   font-weight:200;
   margin-bottom: 1.5rem;
-  color: var(--blue-dark);
   animation: fadeUp 1.2s ease-out both;
 }
 
 #approach h1 {
-  font-size: 3.4rem;
-  font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(to right, var(--primary-color), var(--gray-light));
   -webkit-background-clip: text;
@@ -1648,7 +1424,6 @@ ul li:hover {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: var(--primary-color);
 }
 
 .approach-grid {
@@ -1662,9 +1437,6 @@ ul li:hover {
 #approach .text-block {
   flex: 1 1 45%;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(13, 77, 94, 0.08);
   animation: fadeInUp 1s ease forwards;
 }
 
@@ -1694,8 +1466,6 @@ ul li:hover {
 }
 
 #mission h1 {
-  font-size: 3.4rem;
-  font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(to right, var(--gray-light), var(--primary-color));
   -webkit-background-clip: text;
