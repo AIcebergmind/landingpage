@@ -864,6 +864,68 @@ ul li:hover {
   }
 }
 
+/* === CAPABILITIES GRID === */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.capability-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(170, 208, 209, 0.2);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.capability-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--secondary-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.capability-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.capability-item h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.capability-item p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.capabilities-summary {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.1rem;
+  color: var(--blue-dark);
+}
+
+@media (max-width: 768px) {
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .capability-item {
+    padding: 1.5rem;
+  }
+}
+
 /* === 1. FADE-IN ANIMATION FOR TEXT BLOCKS === */
 .text-block {
   opacity:0;
